@@ -113,3 +113,13 @@ button {
 #buttonDiv > #close-form-btn {
   background-color: rgb(255, 68, 68);
 }
+
+#bookList {
+  display: grid;
+  margin: 20px;
+  /* Explicit grid */
+  grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* Implicit Grid */
+  gap: 10px;
+}
