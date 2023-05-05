@@ -19,6 +19,19 @@ function removeBookFromLibraryAndDom(event) {
   event.target.parentNode.remove();
 }
 
+function toggleReadStatus(event) {
+  const tempEvent = event;
+  const numberOfObjInArr = event.target.id.slice(16);
+
+  // change value in object
+  myLibrary[numberOfObjInArr].read = !myLibrary[numberOfObjInArr].read;
+  // change value in dom
+  tempEvent.target.innerText = myLibrary[numberOfObjInArr].read
+    ? "Read"
+    : "Not read";
+  tempEvent.target.classList.toggle("read");
+}
+
 function addBookFormToDom() {
   formDiv = document.createElement("div");
   // const form = document.createElement("form");
@@ -101,9 +114,9 @@ function printAllBooks(bookArr) {
       .getElementById(`${i}`)
       .addEventListener("click", removeBookFromLibraryAndDom);
     // // to change book status
-    // document
-    //   .querySelector(`#readStatusChange${i}`)
-    //   .addEventListener("click", toggleReadStatus);
+    document
+      .querySelector(`#readStatusChange${i}`)
+      .addEventListener("click", toggleReadStatus);
   }
 }
 
