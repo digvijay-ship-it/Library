@@ -1,0 +1,43 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0px;
+  height: inherit;
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+}
+
+.header {
+  background-color: rgb(254, 251, 250);
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+
+.header > #appName {
+  align-self: center;
+  justify-self: center;
+}
+
+#appName {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.header > #addBookBtn {
+  justify-self: end;
+  align-self: center;
+  margin-right: 50px;
+  background-color: lightgrey;
+  border: none;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  justify-content: space-evenly;
+  transition: 500ms;
+}
+
+button:hover {
+  filter: brightness(70%);
+}
