@@ -1,5 +1,15 @@
+function Book(title, author, pages) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = false;
+}
+
 // to insert form in dom
 let formDiv;
+
+// to collect book obj
+const myLibrary = [];
 
 function addBookFormToDom() {
   formDiv = document.createElement("div");
@@ -34,9 +44,89 @@ function addBookFormToDom() {
           </form>`;
   const contentDiv = document.querySelector(".content");
   contentDiv.appendChild(formDiv);
+
+  // to submit
+  document
+    .querySelector("#btnSubmit")
+    .addEventListener("click", addBookToLibrary);
+  // to remove form
+  document.querySelector("#close-form-btn").addEventListener("click", () => {
+    formDiv.remove();
+  });
 }
 
 // add event listener to add book Form button
 document
   .querySelector("#addBookBtn")
   .addEventListener("click", addBookFormToDom);
+
+function printAllBooks(bookArr) {
+  const bookListDiv = document.querySelector("#bookList");
+  bookListDiv.innerText = "";
+
+  for (let i = 0; i < bookArr.length; i += 1) {
+    // insert all element one by one
+    const bookReadStatus = document.createElement("button");
+    // adding number at last to use id's last index for button manipulation
+    bookReadStatus.id = `readStatusChange${i}`;
+    bookReadStatus.innerText = bookArr[i].read ? "Read" : "Not read";
+
+    // not-read addition is default
+    bookReadStatus.classList.add("not-read");
+    // read class addition only to toggle css property
+    bookReadStatus.classList.add(bookArr[i].read ? "read" : "not-read");
+    const singleBookDiv = document.createElement("div");
+    // singleBookDiv.id = `${i}`;
+    singleBookDiv.classList.add("bookDiv");
+    singleBookDiv.innerHTML = `
+      <p>${bookArr[i].title}</p>
+      <p>${bookArr[i].author}</p>
+      <p>${bookArr[i].pages}</p>
+      `;
+    singleBookDiv.appendChild(bookReadStatus); // Append bookReadStatus to singleBookDiv
+    singleBookDiv.innerHTML += `<button class="removeBookBtn" id="${i}">Remove</button>`;
+
+    bookListDiv.appendChild(singleBookDiv);
+
+    // to remove book
+    // document
+    //   .getElementById(`${i}`)
+    //   .addEventListener("click", removeBookFromLibraryAndDom);
+    // // to change book status
+    // document
+    //   .querySelector(`#readStatusChange${i}`)
+    //   .addEventListener("click", toggleReadStatus);
+  }
+}
+
+function addBookToLibrary(event) {
+  // check if all fields are valid
+  console.log("clicked submit");
+  const bookTitle = document.querySelector("#book-name");
+  const authorOfBook = document.querySelector("#author");
+  const totalPages = document.querySelector("#page-number");
+  if (
+    bookTitle.checkValidity() &&
+    authorOfBook.checkValidity() &&
+    totalPages.checkValidity()
+  ) {
+    event.preventDefault();
+
+    const bookReadStatus = document.querySelector("#had-read").checked;
+
+    const newBookObj = new Book(
+      bookTitle.value,
+      authorOfBook.value,
+      totalPages.value
+    );
+    newBookObj.read = bookReadStatus;
+
+    myLibrary.push(newBookObj);
+
+    // destroy previous from
+    formDiv.remove();
+
+    // show all books
+    printAllBooks(myLibrary);
+  }
+}
