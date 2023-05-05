@@ -117,9 +117,31 @@ button {
 #bookList {
   display: grid;
   margin: 20px;
-  /* Explicit grid */
   grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  /* Implicit Grid */
   gap: 10px;
+}
+
+.bookDiv {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 10px;
+  /* gap: 10px; */
+}
+
+.bookDiv p {
+  justify-self: center;
+  align-self: center;
+}
+.removeBookBtn {
+  background-color: rgb(247, 65, 65);
+}
+.not-read {
+  background-color: hotpink;
+}
+
+.read {
+  background-color: mediumspringgreen;
 }
