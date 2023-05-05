@@ -11,6 +11,14 @@ let formDiv;
 // to collect book obj
 const myLibrary = [];
 
+function removeBookFromLibraryAndDom(event) {
+  // remove from myLibrary
+  myLibrary.splice(event.target.id, 1);
+
+  // remove from Dom
+  event.target.parentNode.remove();
+}
+
 function addBookFormToDom() {
   formDiv = document.createElement("div");
   // const form = document.createElement("form");
@@ -89,9 +97,9 @@ function printAllBooks(bookArr) {
     bookListDiv.appendChild(singleBookDiv);
 
     // to remove book
-    // document
-    //   .getElementById(`${i}`)
-    //   .addEventListener("click", removeBookFromLibraryAndDom);
+    document
+      .getElementById(`${i}`)
+      .addEventListener("click", removeBookFromLibraryAndDom);
     // // to change book status
     // document
     //   .querySelector(`#readStatusChange${i}`)
